@@ -1,0 +1,92 @@
+[
+    {
+        "id": "578cc1bd.59b61",
+        "type": "tab",
+        "label": "twitter",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5cf18ccf.ddf0a4",
+        "type": "debug",
+        "z": "578cc1bd.59b61",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1fcb323c.909c3e",
+        "type": "inject",
+        "z": "578cc1bd.59b61",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "40b7e007.da46f"
+            ]
+        ]
+    },
+    {
+        "id": "40b7e007.da46f",
+        "type": "rpi-dht22",
+        "z": "578cc1bd.59b61",
+        "name": "temp",
+        "topic": "rpi-dht22",
+        "dht": "11",
+        "pintype": "0",
+        "pin": "4",
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "5cf18ccf.ddf0a4",
+                "a19fa9fe.250928"
+            ]
+        ]
+    },
+    {
+        "id": "a19fa9fe.250928",
+        "type": "function",
+        "z": "578cc1bd.59b61",
+        "name": "Prettify",
+        "func": "msg.topic = \"tweet\";\nmsg.location = \"Lenexa, KS\"\ntemp_str = \"The temperature in Lenexa is: \" + msg.payload \ntemp_str2 = \"\\nThe humidity is: \" + msg.humidity\n\nmsg.payload = temp_str + temp_str2;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "8a4d36d7.3fd1e8"
+            ]
+        ]
+    },
+    {
+        "id": "8a4d36d7.3fd1e8",
+        "type": "twitter out",
+        "z": "578cc1bd.59b61",
+        "twitter": "",
+        "name": "Tweet",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    }
+]

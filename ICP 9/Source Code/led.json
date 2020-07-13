@@ -1,0 +1,216 @@
+[
+    {
+        "id": "da5058db.976828",
+        "type": "tab",
+        "label": "dht",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c75a26ba.c3bbe8",
+        "type": "inject",
+        "z": "da5058db.976828",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "9a67cab4.d4e928"
+            ]
+        ]
+    },
+    {
+        "id": "6d1a44c3.3da9bc",
+        "type": "debug",
+        "z": "da5058db.976828",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9a67cab4.d4e928",
+        "type": "rpi-dht22",
+        "z": "da5058db.976828",
+        "name": "dht",
+        "topic": "rpi-dht22",
+        "dht": "11",
+        "pintype": "0",
+        "pin": 4,
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "6d1a44c3.3da9bc",
+                "67958277.e3f78c",
+                "74291ae6.8938d4"
+            ]
+        ]
+    },
+    {
+        "id": "d4128134.02dc3",
+        "type": "debug",
+        "z": "da5058db.976828",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8822ebf7.188408",
+        "type": "debug",
+        "z": "da5058db.976828",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "67958277.e3f78c",
+        "type": "function",
+        "z": "da5058db.976828",
+        "name": "temperature",
+        "func": "msg.payload =msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "d4128134.02dc3",
+                "bd9c82cb.95449"
+            ]
+        ]
+    },
+    {
+        "id": "74291ae6.8938d4",
+        "type": "function",
+        "z": "da5058db.976828",
+        "name": "humidity",
+        "func": "msg.payload = msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 540,
+        "y": 500,
+        "wires": [
+            [
+                "8822ebf7.188408",
+                "b007d27d.f15f8"
+            ]
+        ]
+    },
+    {
+        "id": "bd9c82cb.95449",
+        "type": "ui_gauge",
+        "z": "da5058db.976828",
+        "name": "",
+        "group": "3b35d32d.8773ac",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "'C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 780,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b007d27d.f15f8",
+        "type": "ui_gauge",
+        "z": "da5058db.976828",
+        "name": "",
+        "group": "3b35d32d.8773ac",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 790,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3b35d32d.8773ac",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "f49206d7.f3bbd8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f49206d7.f3bbd8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
